@@ -261,7 +261,15 @@ export function Hero() {
               </div>
               
               <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl lg:text-4xl">
-                Automate insurance compliance during loan servicing
+                <div className="text-center">
+                  <div>Insurance Compliance on</div>
+                  <div className="relative inline-block">
+                    <span className="bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-text text-transparent font-bold">
+                      Autopilot
+                    </span>
+                    <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-blue-700 rounded-full"></span>
+                  </div>
+                </div>
               </h1>
               
               <p className="mt-3 text-base text-gray-600">
