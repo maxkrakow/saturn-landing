@@ -27,6 +27,11 @@ export const metadata: Metadata = {
   },
   description:
     'Saturn automates insurance compliance during loan servicing: it tracks policy requirements per loan, ingests/reads certificates, validates them against rules, and runs AI-driven outreach to brokers and borrowers until compliant.',
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
+  },
 }
 
 export default function RootLayout({
