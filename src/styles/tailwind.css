@@ -13,6 +13,14 @@ html {
   }
 }
 
+/* Pause all animations when Calendly popup is open */
+.pause-animations *,
+.pause-animations *::before,
+.pause-animations *::after {
+  animation-play-state: paused !important;
+  transition: none !important;
+}
+
 @theme {
   --text-*: initial;
   --text-xs: 0.75rem;

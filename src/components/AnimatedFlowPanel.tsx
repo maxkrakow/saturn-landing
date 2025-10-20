@@ -23,10 +23,7 @@ const cardVariants = {
   exit: { opacity: 0, y: -10, scale: 0.98 },
 };
 
-const progressVariants = {
-  initial: { scaleX: 0 },
-  fill: { scaleX: 1, transition: { duration: 1.2, ease: "easeInOut" } },
-};
+// Removed progressVariants due to TypeScript issues
 
 const checkVariants = {
   hidden: { pathLength: 0, opacity: 0 },
@@ -145,9 +142,11 @@ export default function AnimatedFlowPanel({
                     <div className="h-2 overflow-hidden rounded-full bg-slate-200">
                       <motion.div
                         className="h-full origin-left rounded-full bg-sky-500"
-                        variants={progressVariants}
-                        initial="initial"
-                        animate={phase === "filling" ? "fill" : "initial"}
+                        initial={{ scaleX: 0 }}
+                        animate={{ 
+                          scaleX: phase === "filling" ? 1 : 0,
+                          transition: { duration: 1.2, ease: "easeInOut" }
+                        }}
                       />
                     </div>
                   ) : (

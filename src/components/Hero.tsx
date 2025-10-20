@@ -1,7 +1,7 @@
 'use client'
 
 import React, { Fragment, useState } from 'react'
-import { Button } from '@/components/Button'
+import { DemoButton } from '@/components/DemoButton'
 import { Container } from '@/components/Container'
 import { ChatBubbleLeftEllipsisIcon, TagIcon, UserCircleIcon } from '@heroicons/react/20/solid'
 import { Home, Waves, Car, BadgeCheckIcon, XIcon, Mail, FileText, Phone, User, XCircle, CheckCircle } from 'lucide-react'
@@ -271,9 +271,9 @@ export function Hero() {
               
                   {/* CTA Section with Button */}
                   <div className="mt-4">
-                    <Button href="#contact" className="w-full py-3 text-sm">
+                    <DemoButton className="w-full py-3 text-sm">
                       Request a demo
-                    </Button>
+                    </DemoButton>
                   </div>
               
               {/* Benefits list */}

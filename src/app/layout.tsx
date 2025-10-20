@@ -3,6 +3,9 @@ import { DM_Sans, Inter } from 'next/font/google'
 import clsx from 'clsx'
 
 import '@/styles/tailwind.css'
+import { CalendlyProvider } from '@/contexts/CalendlyContext'
+import { CalendlyPopup } from '@/components/CalendlyPopup'
+import { CalendlyWrapper } from '@/components/CalendlyWrapper'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -41,7 +44,10 @@ export default function RootLayout({
       )}
     >
       <body className="flex min-h-full">
-        <div className="flex w-full flex-col">{children}</div>
+        <CalendlyProvider>
+          <div className="flex w-full flex-col">{children}</div>
+          <CalendlyWrapper />
+        </CalendlyProvider>
       </body>
     </html>
   )

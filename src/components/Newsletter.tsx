@@ -1,6 +1,8 @@
+'use client';
+
 import Image from 'next/image'
 
-import { Button } from '@/components/Button'
+import { DemoButton } from '@/components/DemoButton'
 import { Container } from '@/components/Container'
 import backgroundImage from '@/images/background-newsletter.jpg'
 
@@ -30,12 +32,9 @@ export function Newsletter() {
             Book a product demo today.
           </h2>
           <div className="mt-10 lg:mt-0 lg:shrink-0">
-            <button
-              type="button"
-              className="w-full rounded-md bg-indigo-600 px-24 py-3 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500"
-            >
+            <DemoButton className="w-full px-24 py-3 text-sm">
               Book demo
-            </button>
+            </DemoButton>
           </div>
         </div>
       </div>

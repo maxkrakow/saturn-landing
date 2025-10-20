@@ -22,7 +22,7 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
-import { Button } from '@/components/Button'
+import { DemoButton } from '@/components/DemoButton'
 import Image from 'next/image'
 import logoImage from '@/images/logos/logo.png'
 
@@ -130,9 +130,9 @@ export function Header() {
           </a>
         </PopoverGroup>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Button href="#contact" className="px-6 py-2 text-sm">
+          <DemoButton className="px-6 py-2 text-sm">
             Request a demo
-          </Button>
+          </DemoButton>
         </div>
       </nav>
       <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
@@ -204,12 +204,11 @@ export function Header() {
                 </a>
               </div>
                   <div className="py-6">
-                    <Button
-                      href="#contact"
+                    <DemoButton
                       className="w-full px-3.5 py-2.5 text-sm"
                     >
                       Request a demo
-                    </Button>
+                    </DemoButton>
                   </div>
             </div>
           </div>
