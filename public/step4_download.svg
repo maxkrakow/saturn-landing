@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="960" height="640" viewBox="0 0 960 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer phone -->
+  <rect x="240" y="80" rx="36" ry="36" width="480" height="480" fill="white" stroke="#C7D2FE" stroke-width="6"/>
+  <!-- Screen -->
+  <rect x="270" y="130" rx="24" ry="24" width="420" height="380" fill="white" stroke="#E5E7EB" stroke-width="3"/>
+  <!-- Top bar -->
+  <rect x="420" y="96" width="120" height="14" rx="7" fill="#E5E7EB"/>
+  <!-- Bottom buttons -->
+  <rect x="300" y="530" width="120" height="16" rx="8" fill="#E5E7EB"/>
+  <rect x="540" y="530" width="120" height="16" rx="8" fill="#E5E7EB"/>
+  
+  <!-- Content -->
+  
+  <g transform="translate(420,230)">
+    <circle cx="60" cy="60" r="58" fill="#EFF6FF" stroke="#93C5FD" stroke-width="3"/>
+    <path d="M60 35v55" stroke="#3B82F6" stroke-width="6" stroke-linecap="round"/>
+    <path d="M40 70l20 20 20-20" stroke="#3B82F6" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+  <rect x="340" y="360" width="320" height="36" rx="18" fill="#3B82F6"/>
+  <text x="500" y="385" text-anchor="middle" font-family="Inter, Arial" font-size="18" fill="white">Download DOC</text>
+
+</svg>

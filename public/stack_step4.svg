@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="960" height="640" viewBox="0 0 960 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#071949" flood-opacity="0.25"/>
+    </filter>
+    <linearGradient id="glassGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.12"/>
+    </linearGradient>
+  </defs>
+
+  <g filter="url(#shadow)">
+    <rect x="280" y="120" width="400" height="400" rx="28" fill="white" stroke="#C7D2FE" stroke-width="4"/>
+    <rect x="304" y="156" width="352" height="304" rx="22" fill="white" stroke="#E5E7EB" stroke-width="2"/>
+    <rect x="420.0" y="110" width="120" height="12" rx="6" fill="#E5E7EB"/>
+    <!-- content placeholder -->
+    <rect x="340" y="240" width="280" height="14" rx="7" fill="#E5E7EB"/>
+    <rect x="340" y="270" width="240" height="14" rx="7" fill="#E5E7EB"/>
+    <rect x="340" y="300" width="300" height="14" rx="7" fill="#E5E7EB"/>
+    <rect x="340" y="350" width="280" height="40" rx="12" fill="#3B82F6"/>
+    <rect x="380" y="470" width="200" height="12" rx="6" fill="#E5E7EB"/>
+  </g>
+  <g transform="translate(220,158) skewY(-6) scale(1.012)" opacity="0.35">
+    <rect width="520" height="320" rx="26" fill="url(#glassGrad)" stroke="#FFFFFF" stroke-opacity="0.65" stroke-width="2"/>
+  </g>
+  <g transform="translate(220,136) skewY(-6) scale(1.024)" opacity="0.44">
+    <rect width="520" height="320" rx="26" fill="url(#glassGrad)" stroke="#FFFFFF" stroke-opacity="0.65" stroke-width="2"/>
+  </g>
+  <g transform="translate(220,114) skewY(-6) scale(1.036)" opacity="0.53">
+    <rect width="520" height="320" rx="26" fill="url(#glassGrad)" stroke="#FFFFFF" stroke-opacity="0.65" stroke-width="2"/>
+  </g>
+</svg>
