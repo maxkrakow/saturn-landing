@@ -1,3 +1,4 @@
+import React from 'react';
 import { getDemoInsurer } from '@/lib/demo-data';
 import { Phone } from 'lucide-react';
 
@@ -72,9 +73,9 @@ const features = [
 
 export function Features() {
   return (
-    <div id="features" className="relative bg-white py-16 sm:py-20 overflow-hidden">
-      {/* Background decorative elements */}
-      <div className="absolute inset-0 pointer-events-none z-10">
+    <div id="features" className="relative bg-white py-8 sm:py-16 lg:py-20 overflow-hidden">
+      {/* Background decorative elements - hidden on mobile */}
+      <div className="absolute inset-0 pointer-events-none z-10 hidden lg:block">
         {/* Policy Notice - top left */}
         <div className="absolute top-[10%] left-[10%] flex flex-col items-center">
           <div className="inline-flex items-center border border-pink-300 rounded-lg px-3 py-2 bg-pink-50 transform -rotate-[25deg]">
@@ -177,44 +178,48 @@ export function Features() {
         </div>
       </div>
 
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl sm:text-center">
-          <p className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl sm:text-balance">
+          <p className="text-2xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-4xl lg:text-5xl sm:text-balance">
             Complete insurance compliance automation
           </p>
-          <p className="mt-6 text-lg/8 text-gray-600">
+          <p className="mt-4 text-base sm:text-lg/8 text-gray-600">
             Integrate Saturn into your existing systems, ingest documents, ensure accuracy, and automate all
             communication with brokers and borrowers—following up until fully compliant and writing updates back
             to your systems of record.
           </p>
         </div>
       </div>
-      <div className="relative overflow-hidden pt-16">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mb-[-12%] rounded-xl shadow-2xl ring-1 ring-gray-900/10 overflow-hidden">
+      <div className="relative overflow-hidden pt-8 sm:pt-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-[-8%] sm:mb-[-12%] rounded-xl shadow-2xl ring-1 ring-gray-900/10 overflow-hidden">
             <img 
               src="/dashboard-screenshot.png" 
               alt="Saturn Dashboard showing compliance tracking, borrower breakdown, and policy management"
-              className="w-full h-auto max-h-96 object-cover"
+              className="w-full h-auto max-h-64 sm:max-h-96 object-cover"
             />
           </div>
           <div aria-hidden="true" className="relative">
-            <div className="absolute -inset-x-20 bottom-0 bg-gradient-to-t from-white pt-[7%]" />
+            <div className="absolute -inset-x-10 sm:-inset-x-20 bottom-0 bg-gradient-to-t from-white pt-[5%] sm:pt-[7%]" />
           </div>
         </div>
       </div>
-      <div className="mx-auto mt-16 max-w-7xl px-6 sm:mt-20 md:mt-24 lg:px-8">
-        <dl className="mx-auto grid max-w-2xl grid-cols-1 gap-x-6 gap-y-10 text-base/7 text-gray-600 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-x-8 lg:gap-y-16">
+      <div className="mx-auto mt-8 max-w-7xl px-4 sm:mt-16 sm:px-6 md:mt-20 lg:mt-24 lg:px-8">
+        <dl className="mx-auto grid max-w-2xl grid-cols-1 gap-x-4 gap-y-8 text-sm sm:text-base/7 text-gray-600 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-x-8 lg:gap-y-16">
           {features.map((feature) => (
-            <div key={feature.name} className="flex gap-4">
+            <div key={feature.name} className="flex gap-3 sm:gap-4">
               <div className="flex-shrink-0">
-                {feature.icon}
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center" style={{ backgroundColor: feature.icon.props.className.includes('bg-indigo-600') ? '#4f46e5' : feature.icon.props.className.includes('bg-blue-600') ? '#2563eb' : feature.icon.props.className.includes('bg-orange-600') ? '#ea580c' : feature.icon.props.className.includes('bg-purple-600') ? '#9333ea' : feature.icon.props.className.includes('bg-green-600') ? '#16a34a' : feature.icon.props.className.includes('bg-teal-600') ? '#0d9488' : '#4f46e5' }}>
+                  {React.cloneElement(feature.icon, {
+                    className: "w-5 h-5 sm:w-6 sm:h-6 text-white"
+                  })}
+                </div>
               </div>
               <div>
-                <dt className="font-semibold text-gray-900">
+                <dt className="font-semibold text-gray-900 text-sm sm:text-base">
                   {feature.name}
                 </dt>
-                <dd className="mt-1">{feature.description}</dd>
+                <dd className="mt-1 text-xs sm:text-sm">{feature.description}</dd>
               </div>
             </div>
           ))}

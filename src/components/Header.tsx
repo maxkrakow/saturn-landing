@@ -44,12 +44,12 @@ export function Header() {
   return (
     <header className="absolute top-0 left-0 right-0 z-50 bg-transparent">
       <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8 h-20">
-        <div className="flex lg:flex-1">
+        <div className="flex lg:flex-1 -ml-4 lg:ml-0">
           <a href="#" className="-m-1.5 p-1.5">
             <span className="sr-only">Saturn</span>
             <div className="flex items-center space-x-3">
               {/* Saturn Logo */}
-              <div className="relative w-48 h-48flex items-center justify-center">
+              <div className="relative w-48 h-48 flex items-center justify-center">
                 <Image
                   src={logoImage}
                   alt="Saturn Logo"

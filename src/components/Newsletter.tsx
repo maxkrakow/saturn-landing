@@ -29,17 +29,10 @@ export function Newsletter() {
             <br />
             Book a product demo today.
           </h2>
-          <div className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-4 lg:mt-0 lg:shrink-0">
-            <div className="flex-1 min-w-0">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
-              />
-            </div>
+          <div className="mt-10 lg:mt-0 lg:shrink-0">
             <button
               type="button"
-              className="rounded-md bg-indigo-600 px-6 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500 whitespace-nowrap"
+              className="w-full rounded-md bg-indigo-600 px-24 py-3 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500"
             >
               Book demo
             </button>

@@ -93,7 +93,7 @@ export function PolicyStatusBadge({ status, className }: { status: PolicyStatus;
 
 export default function RightPanel({ active, resetKey = 0 }: { active: SceneId; resetKey?: number }) {
   return (
-    <div className="relative rounded-3xl border border-gray-200 bg-white p-4 shadow-xl h-[600px] w-[600px]">
+    <div className="relative rounded-3xl border border-gray-200 bg-white p-4 shadow-xl h-[400px] w-full max-w-[600px] mx-auto lg:h-[600px] lg:w-[600px]">
       <div className="relative w-full h-full overflow-hidden rounded-2xl">
         <AnimatePresence mode="wait">
           {active === "renewal" && <RenewalScene key={`renewal-${resetKey || 0}`} />}

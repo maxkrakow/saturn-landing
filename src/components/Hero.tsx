@@ -243,11 +243,11 @@ export function Hero() {
           className="aspect-1108/632 w-277 bg-gradient-to-r from-blue-400 to-blue-600 opacity-20"
         />
       </div>
-          <Container className="pt-64 pb-6 sm:pb-8 lg:py-8">
+          <Container className="pt-16 pb-6 sm:pt-24 sm:pb-8 lg:pt-32 lg:py-8">
             <div className="mx-auto max-w-7xl">
-              <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8 items-center mt-32">
+              <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8 items-center mt-8 lg:mt-16">
             {/* Left side - Content */}
-            <div className="order-2 lg:order-1">
+            <div className="order-1 lg:order-1">
               <div className="mb-6">
                 <a href="#" className="inline-flex space-x-6">
                   <span className="rounded-full bg-blue-50 px-3 py-1 text-sm font-semibold text-blue-600 ring-1 ring-blue-600/20">
@@ -269,16 +269,9 @@ export function Hero() {
                 and runs AI-driven outreach to brokers and borrowers until compliant—while preserving a full audit trail.
               </p>
               
-                  {/* CTA Section with Email Input and Button */}
-                  <div className="mt-4 flex flex-col sm:flex-row gap-3">
-                    <div className="flex-1">
-                      <input
-                        type="email"
-                        placeholder="Enter your email"
-                        className="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-                      />
-                    </div>
-                    <Button href="#contact" className="px-6 py-3 text-sm whitespace-nowrap">
+                  {/* CTA Section with Button */}
+                  <div className="mt-4">
+                    <Button href="#contact" className="w-full py-3 text-sm">
                       Request a demo
                     </Button>
                   </div>
@@ -305,13 +298,13 @@ export function Hero() {
             </div>
             
             {/* Right side - Dashboard with Tabs */}
-            <div className="order-1 lg:order-2">
+            <div className="order-2 lg:order-2">
               <div className="relative">
-                <div className="w-full max-w-5xl mx-auto bg-white rounded-xl shadow-2xl border border-gray-200 p-6">
+                <div className="w-full max-w-5xl mx-auto bg-white rounded-xl shadow-2xl border border-gray-200 p-4 lg:p-6">
                   
                   {/* Activity Tab Content */}
                   {activeTab === 'activity' && (
-                    <div className="max-h-96 overflow-y-auto">
+                    <div className="max-h-64 lg:max-h-96 overflow-y-auto">
                       {/* Header */}
                       <div className="flex items-center justify-between mb-4">
                         <h3 className="text-lg font-semibold text-gray-900">Recent Activity</h3>
@@ -594,7 +587,7 @@ export function Hero() {
 
                   {/* Overview Tab Content */}
                   {activeTab === 'overview' && (
-                    <div className="max-h-96 overflow-y-auto">
+                    <div className="max-h-64 lg:max-h-96 overflow-y-auto">
                       {/* Header */}
                       <div className="flex items-center justify-between mb-3">
                         <h3 className="text-base font-semibold text-gray-900">Tech Innovations LLC</h3>
