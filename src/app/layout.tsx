@@ -1,11 +1,10 @@
+import clsx from 'clsx'
 import { type Metadata } from 'next'
 import { DM_Sans, Inter } from 'next/font/google'
-import clsx from 'clsx'
 
-import '@/styles/tailwind.css'
-import { CalendlyProvider } from '@/contexts/CalendlyContext'
-import { CalendlyPopup } from '@/components/CalendlyPopup'
 import { CalendlyWrapper } from '@/components/CalendlyWrapper'
+import { CalendlyProvider } from '@/contexts/CalendlyContext'
+import '@/styles/tailwind.css'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -34,21 +33,10 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={clsx(
-        'h-full bg-white antialiased',
-        inter.variable,
-        dmSans.variable,
-      )}
-    >
-      <body className="flex min-h-full">
+    <html lang="en" className={clsx('h-full bg-white antialiased', inter.variable, dmSans.variable)}>
+      <body suppressHydrationWarning className="flex min-h-full">
         <CalendlyProvider>
           <div className="flex w-full flex-col">{children}</div>
           <CalendlyWrapper />

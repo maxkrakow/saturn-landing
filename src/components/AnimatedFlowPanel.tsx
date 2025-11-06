@@ -1,81 +1,84 @@
-'use client';
+'use client'
 
-import React from "react";
-import { motion, AnimatePresence, useMotionValue, useTransform } from "framer-motion";
+import React from 'react'
+import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion'
 
 type Step = {
-  id: string;
-  icon?: React.ReactNode;
-  title: string;
-  desc?: string;
-};
+  id: string
+  icon?: React.ReactNode
+  title: string
+  desc?: string
+}
 
 const DEFAULT_STEPS: Step[] = [
-  { id: "reminder", title: "Reminder", desc: "Broker ping sent" },
-  { id: "renewal", title: "Renewal", desc: "New COI uploaded" },
-  { id: "ocr", title: "OCR Check", desc: "Endorsements validated" },
-  { id: "done", title: "Portfolio Dashboard", desc: "Marked compliant" },
-];
+  { id: 'reminder', title: 'Reminder', desc: 'Broker ping sent' },
+  { id: 'renewal', title: 'Renewal', desc: 'New COI uploaded' },
+  { id: 'ocr', title: 'OCR Check', desc: 'Endorsements validated' },
+  { id: 'done', title: 'Portfolio Dashboard', desc: 'Marked compliant' },
+]
 
 const cardVariants = {
   enter: { opacity: 0, y: 16, scale: 0.98 },
   center: { opacity: 1, y: 0, scale: 1 },
   exit: { opacity: 0, y: -10, scale: 0.98 },
-};
+}
 
 // Removed progressVariants due to TypeScript issues
 
 const checkVariants = {
   hidden: { pathLength: 0, opacity: 0 },
   visible: { pathLength: 1, opacity: 1, transition: { duration: 0.5 } },
-};
+}
 
 export default function AnimatedFlowPanel({
   steps = DEFAULT_STEPS,
   loopDelayMs = 800,
   tilt = true,
 }: {
-  steps?: Step[];
-  loopDelayMs?: number;
-  tilt?: boolean;
+  steps?: Step[]
+  loopDelayMs?: number
+  tilt?: boolean
 }) {
-  const [index, setIndex] = React.useState(0);
-  const [phase, setPhase] = React.useState<"idle" | "filling" | "checked">("idle");
+  const [index, setIndex] = React.useState(0)
+  const [phase, setPhase] = React.useState<'idle' | 'filling' | 'checked'>('idle')
 
   // subtle interactive tilt
-  const mx = useMotionValue(0);
-  const my = useMotionValue(0);
-  const rx = useTransform(my, [-80, 80], [8, -8]);
-  const ry = useTransform(mx, [-80, 80], [-8, 8]);
+  const mx = useMotionValue(0)
+  const my = useMotionValue(0)
+  const rx = useTransform(my, [-80, 80], [8, -8])
+  const ry = useTransform(mx, [-80, 80], [-8, 8])
 
   const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const r = e.currentTarget.getBoundingClientRect();
-    mx.set(e.clientX - (r.left + r.width / 2));
-    my.set(e.clientY - (r.top + r.height / 2));
-  };
+    const r = e.currentTarget.getBoundingClientRect()
+    mx.set(e.clientX - (r.left + r.width / 2))
+    my.set(e.clientY - (r.top + r.height / 2))
+  }
 
   React.useEffect(() => {
     // timeline per step: progress fill -> check -> next
-    setPhase("filling");
-    const t1 = setTimeout(() => setPhase("checked"), 1200);
-    const t2 = setTimeout(() => {
-      setIndex((i) => (i + 1) % steps.length);
-      setPhase("idle");
-    }, 1200 + 500 + loopDelayMs);
+    setPhase('filling')
+    const t1 = setTimeout(() => setPhase('checked'), 1200)
+    const t2 = setTimeout(
+      () => {
+        setIndex((i) => (i + 1) % steps.length)
+        setPhase('idle')
+      },
+      1200 + 500 + loopDelayMs
+    )
     return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-    };
-  }, [index, steps.length, loopDelayMs]);
+      clearTimeout(t1)
+      clearTimeout(t2)
+    }
+  }, [index, steps.length, loopDelayMs])
 
-  const current = steps[index];
+  const current = steps[index]
 
   return (
     <motion.div
       onMouseMove={tilt ? onMove : undefined}
       onMouseLeave={() => {
-        mx.set(0);
-        my.set(0);
+        mx.set(0)
+        my.set(0)
       }}
       style={tilt ? { rotateX: rx, rotateY: ry } : {}}
       className="relative w-full rounded-3xl border border-slate-200 bg-white p-4 shadow-xl md:p-6"
@@ -87,9 +90,7 @@ export default function AnimatedFlowPanel({
       <div className="mb-4 flex items-center justify-between">
         <div>
           <h3 className="text-lg font-semibold text-slate-900">Automate renewals—hands-off</h3>
-          <p className="text-sm text-slate-600">
-            Messages trigger automatically; docs are checked for accuracy.
-          </p>
+          <p className="text-sm text-slate-600">Messages trigger automatically; docs are checked for accuracy.</p>
         </div>
         <span className="rounded-full border border-slate-200 bg-white px-2 py-1 text-xs text-slate-600">
           Live
@@ -110,7 +111,7 @@ export default function AnimatedFlowPanel({
             initial="enter"
             animate="center"
             exit="exit"
-            transition={{ type: "spring", stiffness: 320, damping: 28 }}
+            transition={{ type: 'spring', stiffness: 320, damping: 28 }}
             className="absolute inset-x-0 top-0 mx-auto w-full"
           >
             <div className="mx-auto w-full rounded-2xl border border-slate-200 bg-white p-4 shadow-lg">
@@ -130,30 +131,25 @@ export default function AnimatedFlowPanel({
                   </div>
                   <div>
                     <div className="text-sm font-semibold text-slate-900">{current.title}</div>
-                    {current.desc && (
-                      <div className="text-xs text-slate-600">{current.desc}</div>
-                    )}
+                    {current.desc && <div className="text-xs text-slate-600">{current.desc}</div>}
                   </div>
                 </div>
 
                 {/* status area: progress bar -> check */}
                 <div className="w-28">
-                  {phase !== "checked" ? (
+                  {phase !== 'checked' ? (
                     <div className="h-2 overflow-hidden rounded-full bg-slate-200">
                       <motion.div
                         className="h-full origin-left rounded-full bg-sky-500"
                         initial={{ scaleX: 0 }}
-                        animate={{ 
-                          scaleX: phase === "filling" ? 1 : 0,
-                          transition: { duration: 1.2, ease: "easeInOut" }
+                        animate={{
+                          scaleX: phase === 'filling' ? 1 : 0,
+                          transition: { duration: 1.2, ease: 'easeInOut' },
                         }}
                       />
                     </div>
                   ) : (
-                    <motion.svg
-                      viewBox="0 0 24 24"
-                      className="mx-auto h-6 w-6 text-emerald-600"
-                    >
+                    <motion.svg viewBox="0 0 24 24" className="mx-auto h-6 w-6 text-emerald-600">
                       <motion.path
                         d="M5 13l4 4L19 7"
                         fill="none"
@@ -172,7 +168,7 @@ export default function AnimatedFlowPanel({
 
               {/* shimmer on success */}
               <AnimatePresence>
-                {phase === "checked" && (
+                {phase === 'checked' && (
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -190,19 +186,13 @@ export default function AnimatedFlowPanel({
 
       {/* footer hints */}
       <div className="mt-4 grid grid-cols-3 gap-2 text-[11px] text-slate-600">
-        <div className="rounded-lg border border-slate-200 bg-white px-2 py-1">
-          SMS sent to broker
-        </div>
-        <div className="rounded-lg border border-slate-200 bg-white px-2 py-1">
-          Email follow-up queued
-        </div>
-        <div className="rounded-lg border border-slate-200 bg-white px-2 py-1">
-          COI parsed via OCR
-        </div>
+        <div className="rounded-lg border border-slate-200 bg-white px-2 py-1">SMS sent to broker</div>
+        <div className="rounded-lg border border-slate-200 bg-white px-2 py-1">Email follow-up queued</div>
+        <div className="rounded-lg border border-slate-200 bg-white px-2 py-1">COI parsed via OCR</div>
       </div>
 
       {/* soft ring */}
       <div className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/40" />
     </motion.div>
-  );
+  )
 }

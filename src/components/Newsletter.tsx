@@ -1,10 +1,5 @@
-'use client';
-
-import Image from 'next/image'
-
 import { DemoButton } from '@/components/DemoButton'
 import { Container } from '@/components/Container'
-import backgroundImage from '@/images/background-newsletter.jpg'
 
 function ArrowRightIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -32,9 +27,7 @@ export function Newsletter() {
             Book a product demo today.
           </h2>
           <div className="mt-10 lg:mt-0 lg:shrink-0">
-            <DemoButton className="w-full px-24 py-3 text-sm">
-              Book demo
-            </DemoButton>
+            <DemoButton className="w-full px-24 py-3 text-sm">Book demo</DemoButton>
           </div>
         </div>
       </div>

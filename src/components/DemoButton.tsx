@@ -1,43 +1,43 @@
-'use client';
+'use client'
 
-import { useCalendly } from '@/contexts/CalendlyContext';
-import clsx from 'clsx';
+import { useCalendly } from '@/contexts/CalendlyContext'
+import { cn } from '@/lib/utils'
 
 interface DemoButtonProps {
-  children: React.ReactNode;
-  className?: string;
-  href?: string;
-  onClick?: (e: React.MouseEvent) => void;
+  children: React.ReactNode
+  className?: string
+  href?: string
+  onClick?: (e: React.MouseEvent) => void
 }
 
 export function DemoButton({ className, children, href, onClick, ...props }: DemoButtonProps) {
-  const { openCalendly } = useCalendly();
-  
-  className = clsx(
+  const { openCalendly } = useCalendly()
+
+  className = cn(
     'inline-flex justify-center items-center rounded-md px-8 py-3 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-colors',
     'bg-indigo-600',
-    className,
-  );
+    className
+  )
 
   const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    openCalendly();
+    e.preventDefault()
+    openCalendly()
     if (onClick) {
-      onClick(e);
+      onClick(e)
     }
-  };
+  }
 
   if (href) {
     return (
       <a href={href} className={className} onClick={handleClick} {...props}>
         {children}
       </a>
-    );
+    )
   }
 
   return (
     <button className={className} onClick={handleClick} {...props}>
       {children}
     </button>
-  );
+  )
 }

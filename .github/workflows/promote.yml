@@ -1,0 +1,84 @@
+name: Promote main to prod
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create/Update PR with commit details
+        uses: actions/github-script@v8
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            const BASE = 'prod';   // default branch
+            const HEAD = 'main';   // work branch
+
+            // compare commits BASE...HEAD
+            const cmp = await github.rest.repos.compareCommitsWithBasehead({
+              owner, repo, basehead: `${BASE}...${HEAD}`,
+            });
+            const commits = cmp.data.commits;
+
+            if (!commits.length) {
+              core.notice(`No changes from ${BASE} to ${HEAD}.`);
+              return;
+            }
+
+            // Build markdown body
+            const rows = commits.map(c => {
+              const title = c.commit.message.split('\n')[0];
+              const sha = c.sha.substring(0,7);
+              const author = c.author?.login || c.commit.author?.name || 'unknown';
+              const date = new Date(c.commit.author.date).toISOString().slice(0,10);
+              return `- ${sha} ${title} — ${author} (${date}) [view](${c.html_url})`;
+            }).join('\n');
+
+            const types = ['feat','fix','perf','refactor','docs','test','build','ci','chore'];
+            const counts = Object.fromEntries(types.map(t=>[t,0]));
+            for (const c of commits) {
+              const first = c.commit.message.split('\n')[0];
+              const m = first.match(/^(\w+)(\(.+\))?!?:/);
+              if (m && counts[m[1]] !== undefined) counts[m[1]]++;
+            }
+            const breakdown = Object.entries(counts).filter(([,n])=>n)
+              .map(([k,n])=>`- **${k}**: ${n}`).join('\n') || '- No conventional types detected';
+
+            const title = `chore: promote ${HEAD} → ${BASE} (${new Date().toISOString().slice(0,10)})`;
+            const body = [
+              `Promotes \`${HEAD}\` → \`${BASE}\`.`,
+              ``,
+              `**Commits since \`${BASE}\`**: ${commits.length}`,
+              ``,
+              `### Breakdown`,
+              breakdown,
+              ``,
+              `### Commits`,
+              rows
+            ].join('\n');
+
+            // Reuse existing open PR if present
+            const open = await github.rest.pulls.list({
+              owner, repo, state: 'open', base: BASE, head: `${owner}:${HEAD}`,
+            });
+
+            if (open.data.length) {
+              const pr = open.data[0];
+              await github.rest.pulls.update({ owner, repo, pull_number: pr.number, title, body });
+              core.info(`Updated PR #${pr.number}: ${pr.html_url}`);
+            } else {
+              const pr = await github.rest.pulls.create({
+                owner, repo, base: BASE, head: HEAD, title, body, maintainer_can_modify: true,
+              });
+              core.info(`Created PR #${pr.data.number}: ${pr.data.html_url}`);
+            }
