@@ -1,7 +1,7 @@
 'use client'
 
 import { useCalendly } from '@/contexts/CalendlyContext'
-import clsx from 'clsx'
+import { cn } from '@/lib/utils'
 
 interface DemoButtonProps {
   children: React.ReactNode
@@ -13,7 +13,7 @@ interface DemoButtonProps {
 export function DemoButton({ className, children, href, onClick, ...props }: DemoButtonProps) {
   const { openCalendly } = useCalendly()
 
-  className = clsx(
+  className = cn(
     'inline-flex justify-center items-center rounded-md px-8 py-3 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-colors',
     'bg-indigo-600',
     className

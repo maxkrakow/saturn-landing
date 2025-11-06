@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 import { getDemoInsurer } from '@/lib/demo-data'
 import { Phone } from 'lucide-react'
 
@@ -198,13 +199,16 @@ export function Features() {
           </p>
         </div>
       </div>
-      <div className="relative overflow-hidden pt-8 sm:pt-16">
+        <div className="relative overflow-hidden pt-8 sm:pt-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-[-8%] overflow-hidden rounded-xl shadow-2xl ring-1 ring-gray-900/10 sm:mb-[-12%]">
-            <img
+            <Image
               src="/dashboard-screenshot.png"
               alt="Saturn Dashboard showing compliance tracking, borrower breakdown, and policy management"
+              width={1920}
+              height={1080}
               className="h-auto max-h-64 w-full object-cover sm:max-h-96"
+              priority
             />
           </div>
           <div aria-hidden="true" className="relative">

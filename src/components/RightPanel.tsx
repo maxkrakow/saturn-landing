@@ -30,6 +30,43 @@ export type PolicyStatus =
   | 'CANCELLED'
   | 'FORCE_PLACED'
 
+type MessageBadge = {
+  text: string
+  variant: string
+  icon?: React.ComponentType<{ className?: string }>
+}
+
+type BaseMessage = {
+  id: string
+  timestamp: string
+}
+
+type AIMessage = BaseMessage & {
+  type: 'ai'
+  text: string
+  name: string
+  label?: string
+  badges?: MessageBadge[]
+  emailContent?: string
+}
+
+type UserMessage = BaseMessage & {
+  type: 'user'
+  text: string
+  name: string
+  avatar?: string
+}
+
+type SystemMessage = BaseMessage & {
+  type: 'system'
+  text: string
+  label?: string
+  badges?: MessageBadge[]
+  emailContent?: string
+}
+
+type Message = AIMessage | UserMessage | SystemMessage
+
 type StatusConfig = {
   label: string
   icon: React.ComponentType<{ className?: string }>
@@ -107,17 +144,7 @@ export default function RightPanel({ active, resetKey = 0 }: { active: SceneId; 
 
 /* ---------- SCENE 1: RENEWALS (AI conversation + automation) ---------- */
 function RenewalScene() {
-  const [messages, setMessages] = React.useState<
-    Array<{
-      id: string
-      type: 'ai' | 'user' | 'system'
-      text: string
-      timestamp: string
-      avatar?: string
-      name?: string
-      badges?: Array<{ text: string; variant: string; icon?: any }>
-    }>
-  >([])
+  const [messages, setMessages] = React.useState<Message[]>([])
   const [hasStarted, setHasStarted] = React.useState(false)
   const messagesEndRef = React.useRef<HTMLDivElement>(null)
   const containerRef = React.useRef<HTMLDivElement>(null)
@@ -322,7 +349,7 @@ function RenewalScene() {
                           <div className="flex-1">
                             <div className="mb-2 flex items-center gap-2">
                               <span className="text-sm font-medium text-gray-900">
-                                {(message as any).label || message.name}
+                                {message.label || message.name}
                               </span>
                               <span className="text-xs text-gray-500">{message.timestamp}</span>
                             </div>
@@ -331,14 +358,15 @@ function RenewalScene() {
                               animate={{ opacity: 1 }}
                               transition={{ delay: 0.3, duration: 0.4 }}
                               className="mb-3 text-sm text-gray-700"
-                              dangerouslySetInnerHTML={{
-                                __html: message.text.replace(/portal/g, '<u>portal</u>'),
-                              }}
-                            />
-                            {(message as any).emailContent && (
+                            >
+                              {message.text.split(/(portal)/g).map((part, i) =>
+                                part === 'portal' ? <u key={i}>{part}</u> : part
+                              )}
+                            </motion.p>
+                            {message.emailContent && (
                               <div className="mb-3 max-w-[400px] rounded-lg border border-gray-200 bg-gray-50 p-3">
                                 <pre className="whitespace-pre-wrap font-sans text-xs text-gray-600">
-                                  {(message as any).emailContent}
+                                  {message.emailContent}
                                 </pre>
                               </div>
                             )}
@@ -382,16 +410,16 @@ function RenewalScene() {
                         <>
                           <div
                             className={`flex size-8 items-center justify-center rounded-full ${
-                              (message as any).label === 'Policy set to expire'
+                              message.label === 'Policy set to expire'
                                 ? 'bg-orange-500'
-                                : (message as any).label === 'Called John Doe'
+                                : message.label === 'Called John Doe'
                                   ? 'bg-green-500'
-                                  : (message as any).label === 'Document uploaded from John Doe'
+                                  : message.label === 'Document uploaded from John Doe'
                                     ? 'bg-blue-500'
                                     : 'bg-purple-500'
                             }`}
                           >
-                            {(message as any).label === 'Policy set to expire' ? (
+                            {message.label === 'Policy set to expire' ? (
                               <svg className="h-4 w-4 text-white" fill="currentColor" viewBox="0 0 20 20">
                                 <path
                                   fillRule="evenodd"
@@ -399,11 +427,11 @@ function RenewalScene() {
                                   clipRule="evenodd"
                                 />
                               </svg>
-                            ) : (message as any).label === 'Called John Doe' ? (
+                            ) : message.label === 'Called John Doe' ? (
                               <svg className="h-4 w-4 text-white" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                               </svg>
-                            ) : (message as any).label === 'Document uploaded from John Doe' ? (
+                            ) : message.label === 'Document uploaded from John Doe' ? (
                               <svg className="h-4 w-4 text-white" fill="currentColor" viewBox="0 0 20 20">
                                 <path
                                   fillRule="evenodd"
@@ -421,15 +449,15 @@ function RenewalScene() {
                           <div className="flex-1">
                             <div className="mb-2 flex items-center gap-2">
                               <span className="text-sm font-medium text-gray-900">
-                                {(message as any).label || 'System'}
+                                {message.label || 'System'}
                               </span>
                               <span className="text-xs text-gray-500">{message.timestamp}</span>
                             </div>
                             <p className="mb-3 text-sm text-gray-700">{message.text}</p>
-                            {(message as any).emailContent && (
+                            {message.emailContent && (
                               <div className="mb-3 max-w-[400px] rounded-lg border border-gray-200 bg-gray-50 p-3">
                                 <pre className="whitespace-pre-wrap font-sans text-xs text-gray-600">
-                                  {(message as any).emailContent}
+                                  {message.emailContent}
                                 </pre>
                               </div>
                             )}

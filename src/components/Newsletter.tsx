@@ -1,10 +1,5 @@
-'use client'
-
-import Image from 'next/image'
-
 import { DemoButton } from '@/components/DemoButton'
 import { Container } from '@/components/Container'
-import backgroundImage from '@/images/background-newsletter.jpg'
 
 function ArrowRightIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (

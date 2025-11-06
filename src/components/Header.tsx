@@ -1,6 +1,8 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
 import {
   Dialog,
   DialogPanel,
@@ -23,7 +25,6 @@ import {
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
 import { DemoButton } from '@/components/DemoButton'
-import Image from 'next/image'
 import logoImage from '@/images/logos/logo.png'
 
 const products = [
@@ -70,7 +71,7 @@ export function Header() {
     <header className="absolute left-0 right-0 top-0 z-50 bg-transparent">
       <nav aria-label="Global" className="mx-auto flex h-20 max-w-7xl items-center justify-between p-6 lg:px-8">
         <div className="-ml-4 flex lg:ml-0 lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
+          <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Saturn</span>
             <div className="flex items-center space-x-3">
               {/* Saturn Logo */}
@@ -78,7 +79,7 @@ export function Header() {
                 <Image src={logoImage} alt="Saturn Logo" width={144} height={144} className="h-48 w-48" />
               </div>
             </div>
-          </a>
+          </Link>
         </div>
         <div className="flex lg:hidden">
           <button
@@ -153,7 +154,7 @@ export function Header() {
         <div className="fixed inset-0 z-50" />
         <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            <a href="#" className="-m-1.5 p-1.5">
+            <Link href="/" className="-m-1.5 p-1.5">
               <span className="sr-only">Saturn</span>
               <div className="flex items-center space-x-3">
                 <div className="relative flex h-36 w-36 items-center justify-center">
@@ -161,7 +162,7 @@ export function Header() {
                 </div>
                 <span className="text-xl font-bold text-[#007AFF]">saturn</span>
               </div>
-            </a>
+            </Link>
             <button
               type="button"
               onClick={() => setMobileMenuOpen(false)}
