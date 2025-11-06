@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import Image from 'next/image'
 
@@ -32,9 +32,7 @@ export function Newsletter() {
             Book a product demo today.
           </h2>
           <div className="mt-10 lg:mt-0 lg:shrink-0">
-            <DemoButton className="w-full px-24 py-3 text-sm">
-              Book demo
-            </DemoButton>
+            <DemoButton className="w-full px-24 py-3 text-sm">Book demo</DemoButton>
           </div>
         </div>
       </div>

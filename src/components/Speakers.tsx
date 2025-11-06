@@ -140,10 +140,7 @@ const days = [
   },
 ]
 
-function ImageClipPaths({
-  id,
-  ...props
-}: React.ComponentPropsWithoutRef<'svg'> & { id: string }) {
+function ImageClipPaths({ id, ...props }: React.ComponentPropsWithoutRef<'svg'> & { id: string }) {
   return (
     <svg aria-hidden="true" width={0} height={0} {...props}>
       <defs>
@@ -181,11 +178,7 @@ export function Speakers() {
   }, [])
 
   return (
-    <section
-      id="speakers"
-      aria-labelledby="speakers-title"
-      className="py-20 sm:py-32"
-    >
+    <section id="speakers" aria-labelledby="speakers-title" className="py-20 sm:py-32">
       <ImageClipPaths id={id} />
       <Container>
         <div className="mx-auto max-w-2xl lg:mx-0">
@@ -195,9 +188,8 @@ export function Speakers() {
           >
             Speakers
           </h2>
-          <p className="mt-4 font-display text-2xl tracking-tight text-blue-900">
-            Learn from the experts on the cutting-edge of deception at the most
-            sinister companies.
+          <p className="font-display mt-4 text-2xl tracking-tight text-blue-900">
+            Learn from the experts on the cutting-edge of deception at the most sinister companies.
           </p>
         </div>
         <TabGroup
@@ -205,27 +197,25 @@ export function Speakers() {
           vertical={tabOrientation === 'vertical'}
         >
           <div className="relative -mx-4 flex overflow-x-auto pb-4 sm:mx-0 sm:block sm:overflow-visible sm:pb-0">
-            <div className="absolute top-2 bottom-0 left-0.5 hidden w-px bg-slate-200 lg:block" />
-            <TabList className="grid auto-cols-auto grid-flow-col justify-start gap-x-8 gap-y-10 px-4 whitespace-nowrap sm:mx-auto sm:max-w-2xl sm:grid-cols-3 sm:px-0 sm:text-center lg:grid-flow-row lg:grid-cols-1 lg:text-left">
+            <div className="absolute bottom-0 left-0.5 top-2 hidden w-px bg-slate-200 lg:block" />
+            <TabList className="grid auto-cols-auto grid-flow-col justify-start gap-x-8 gap-y-10 whitespace-nowrap px-4 sm:mx-auto sm:max-w-2xl sm:grid-cols-3 sm:px-0 sm:text-center lg:grid-flow-row lg:grid-cols-1 lg:text-left">
               {({ selectedIndex }) => (
                 <>
                   {days.map((day, dayIndex) => (
                     <div key={day.dateTime} className="relative lg:pl-8">
                       <DiamondIcon
                         className={clsx(
-                          'absolute top-2.25 left-[-0.5px] hidden h-1.5 w-1.5 overflow-visible lg:block',
+                          'top-2.25 absolute left-[-0.5px] hidden h-1.5 w-1.5 overflow-visible lg:block',
                           dayIndex === selectedIndex
                             ? 'fill-blue-600 stroke-blue-600'
-                            : 'fill-transparent stroke-slate-400',
+                            : 'fill-transparent stroke-slate-400'
                         )}
                       />
                       <div className="relative">
                         <div
                           className={clsx(
                             'font-mono text-sm',
-                            dayIndex === selectedIndex
-                              ? 'text-blue-600'
-                              : 'text-slate-500',
+                            dayIndex === selectedIndex ? 'text-blue-600' : 'text-slate-500'
                           )}
                         >
                           <Tab className="data-selected:not-data-focus:outline-hidden">
@@ -250,20 +240,16 @@ export function Speakers() {
             {days.map((day) => (
               <TabPanel
                 key={day.dateTime}
-                className="grid grid-cols-1 gap-x-8 gap-y-10 data-selected:not-data-focus:outline-hidden sm:grid-cols-2 sm:gap-y-16 md:grid-cols-3"
+                className="data-selected:not-data-focus:outline-hidden grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 sm:gap-y-16 md:grid-cols-3"
                 unmount={false}
               >
                 {day.speakers.map((speaker, speakerIndex) => (
                   <div key={speakerIndex}>
-                    <div className="group relative h-70 transform overflow-hidden rounded-4xl">
+                    <div className="h-70 rounded-4xl group relative transform overflow-hidden">
                       <div
                         className={clsx(
-                          'absolute top-0 right-4 bottom-6 left-0 rounded-4xl border transition duration-300 group-hover:scale-95 xl:right-6',
-                          [
-                            'border-blue-300',
-                            'border-indigo-300',
-                            'border-sky-300',
-                          ][speakerIndex % 3],
+                          'rounded-4xl absolute bottom-6 left-0 right-4 top-0 border transition duration-300 group-hover:scale-95 xl:right-6',
+                          ['border-blue-300', 'border-indigo-300', 'border-sky-300'][speakerIndex % 3]
                         )}
                       />
                       <div
@@ -279,12 +265,10 @@ export function Speakers() {
                         />
                       </div>
                     </div>
-                    <h3 className="mt-8 font-display text-xl font-bold tracking-tight text-slate-900">
+                    <h3 className="font-display mt-8 text-xl font-bold tracking-tight text-slate-900">
                       {speaker.name}
                     </h3>
-                    <p className="mt-1 text-base tracking-tight text-slate-500">
-                      {speaker.role}
-                    </p>
+                    <p className="mt-1 text-base tracking-tight text-slate-500">{speaker.role}</p>
                   </div>
                 ))}
               </TabPanel>
