@@ -48,7 +48,7 @@ export default function RootLayout({
         dmSans.variable,
       )}
     >
-      <body className="flex min-h-full">
+      <body suppressHydrationWarning className="flex min-h-full">
         <CalendlyProvider>
           <div className="flex w-full flex-col">{children}</div>
           <CalendlyWrapper />
